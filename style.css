@@ -1,27 +1,45 @@
 
+/* =========================
+   GENERAL
+   ========================= */
 
-{ 
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Times New Roman", Times, serif;
 }
 
+
+/* =========================
+   LOGIN / REGISTER
+   ========================= */
+
 body {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #e2e2e2, #ffe6c9);
+    color: #333;
+}
+
+
+/*
+   Το flex το χρησιμοποιούμε μόνο
+   στη σελίδα login/register.
+*/
+.login-page {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to bottom, #e2e2e2, #ffe6c9);
-    color: #333
 }
+
 
 .container {
     margin: 0 15px;
-
 }
 
-.form-box{
+
+.form-box {
     width: 100%;
     max-width: 500px;
     padding: 30px;
@@ -29,18 +47,20 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: none;
-
 }
+
 
 .form-box.shown {
     display: block;
 }
+
 
 h2 {
     font-size: 34px;
     text-align: center;
     margin-bottom: 25px;
 }
+
 
 input,
 select {
@@ -55,8 +75,9 @@ select {
     margin-bottom: 20px;
 }
 
+
 button {
-    width:100%;
+    width: 100%;
     padding: 12px;
     background: #ffba6a;
     border-radius: 6px;
@@ -69,9 +90,11 @@ button {
     transition: 0.5s;
 }
 
+
 button:hover {
     background: #d39f68;
 }
+
 
 p {
     font-size: 14.5px;
@@ -79,16 +102,19 @@ p {
     margin-bottom: 10px;
 }
 
+
 p a {
     color: #d39f68;
     text-decoration: none;
 }
 
-p a:hover{
+
+p a:hover {
     text-decoration: underline;
 }
 
-.error-message{
+
+.error-message {
     padding: 12px;
     background: #f8d7da;
     border-radius: 6px;
@@ -98,24 +124,36 @@ p a:hover{
     margin-bottom: 20px;
 }
 
+
+/* =========================
+   GENERAL BOX PAGES
+   ========================= */
+
 h1 {
     font-size: 50px;
 }
 
+
 span {
-    color: #ecbe74
+    color: #ecbe74;
 }
 
-.box p{
+
+.box p {
     font-size: 22px;
 }
 
-.box button{
+
+.box button {
     display: block;
     width: 300px;
     margin: 0 auto;
 }
 
+
+/* =========================
+   ROLE SELECTION PAGE
+   ========================= */
 
 .role-container {
     width: 90%;
@@ -125,17 +163,22 @@ span {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+
+    margin: 100px auto;
 }
+
 
 .role-container h1 {
     font-size: 32px;
     margin-bottom: 15px;
 }
 
+
 .role-container p {
     font-size: 18px;
     margin-bottom: 35px;
 }
+
 
 .role-buttons {
     display: flex;
@@ -143,6 +186,7 @@ span {
     gap: 30px;
     margin-bottom: 30px;
 }
+
 
 .role-buttons button {
     width: 300px;
@@ -152,14 +196,139 @@ span {
     margin-bottom: 0;
 }
 
+
 .logout-button {
     width: 200px;
     background: #777;
 }
 
+
 .logout-button:hover {
     background: #555;
 }
+
+
+/* =========================
+   USER PAGE - LOGO
+   ========================= */
+
+.logo {
+    width: 100%;
+    padding: 25px 0;
+
+    text-align: center;
+
+    background-color: #fff;
+
+    font-size: 42px;
+    font-weight: bold;
+
+    color: #f29a3c;
+}
+
+
+/* =========================
+   USER PAGE - NAVBAR
+   ========================= */
+
+.navbar {
+    list-style-type: none;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    background-color: #333;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+.navbar li {
+    float: none;
+}
+
+
+.navbar li a {
+    display: block;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 14px 25px;
+
+    text-decoration: none;
+
+    font-size: 17px;
+}
+
+
+.navbar li a:hover {
+    background-color: #111;
+}
+
+
+.navbar li a.active {
+    background-color: #f29a3c;
+}
+
+
+/*  USER PAGE - WELCOME   */
+
+.user-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 15px 40px;
+
+}
+
+.user-header h1 {
+    font-size: 30px;
+
+    margin: 0 0 10px 0;
+}
+
+
+.user-header h1 span {
+    color: #f29a3c;
+}
+
+
+.user-header p {
+    text-align: center;
+    font-size: 18px;
+}
+
+
+/* =========================
+   USER PAGE - LOGOUT
+   ========================= */
+
+.user-header button {
+    width: 150px;
+    margin-top: 20px;
+    background-color: #f29a3c;
+}
+
+.user-header button:hover {
+    background-color: #f29a3c;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
 
 @media (max-width: 700px) {
 
@@ -172,4 +341,19 @@ span {
         width: 100%;
         max-width: 350px;
     }
+
+    .navbar li a {
+        padding: 14px 10px;
+        font-size: 14px;
+    }
+
+    .user-header {
+        padding: 25px;
+    }
+
+    .user-header h1 {
+        font-size: 24px;
+    }
+
 }
+
