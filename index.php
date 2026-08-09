@@ -34,8 +34,8 @@ function isShownForm($formName, $shownForm) {
 
 </head>
 
-<body>
-    
+<body class="login-page">   
+     
     <div class="container">
         <div class="form-box <?= isShownForm('login', $shownForm) ?>" id="login-form">
             <form action="login_register.php" method="post">

@@ -31,20 +31,20 @@ if (!isset($_SESSION['username'])) {
     <ul class="navbar">
 
         <li>
-            <a class="active" href="user_page.php">
-                Λίστα Αγγελιών
+            <a href="chef_page.php">
+                Διαχείριση Αγγελιών
             </a>
         </li>
 
         <li>
-            <a href="user_map.php">
-                Χάρτης
+            <a href="chef_aggelies.php">
+                Διαχείριση Αιτημάτων
             </a>
         </li>
 
         <li>
-            <a href="user_grade.php">
-                Βαθμολογία
+            <a class="active" href="chef_points.php">
+               Προβολή Πόντων
             </a>
         </li>
 
@@ -70,5 +70,3 @@ if (!isset($_SESSION['username'])) {
 </body>
 
 </html>
-
-

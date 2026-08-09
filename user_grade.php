@@ -31,21 +31,15 @@ if (!isset($_SESSION['username'])) {
     <ul class="navbar">
 
         <li>
-            <a class="active" href="user_page.php">
-                Λίστα Αγγελιών
-            </a>
+            <a href="user_page.php"> Λίστα Αγγελιών </a>
         </li>
 
         <li>
-            <a href="user_map.php">
-                Χάρτης
-            </a>
+            <a href="user_map.php"> Χάρτης </a>
         </li>
 
         <li>
-            <a href="user_grade.php">
-                Βαθμολογία
-            </a>
+            <a class="active" href="user_grade.php"> Βαθμολογία </a>
         </li>
 
     </ul>
@@ -70,5 +64,3 @@ if (!isset($_SESSION['username'])) {
 </body>
 
 </html>
-
-

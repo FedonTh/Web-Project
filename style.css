@@ -22,10 +22,6 @@ body {
 }
 
 
-/*
-   Το flex το χρησιμοποιούμε μόνο
-   στη σελίδα login/register.
-*/
 .login-page {
     display: flex;
     justify-content: center;
@@ -79,7 +75,7 @@ select {
 button {
     width: 100%;
     padding: 12px;
-    background: #ffba6a;
+    background: #f29a3c;
     border-radius: 6px;
     border: none;
     cursor: pointer;
@@ -92,7 +88,7 @@ button {
 
 
 button:hover {
-    background: #d39f68;
+    background: #f29a3c;
 }
 
 
@@ -104,7 +100,7 @@ p {
 
 
 p a {
-    color: #d39f68;
+    color: #f29a3c;
     text-decoration: none;
 }
 
@@ -135,7 +131,7 @@ h1 {
 
 
 span {
-    color: #ecbe74;
+    color: #f29a3c;
 }
 
 

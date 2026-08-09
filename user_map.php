@@ -22,53 +22,37 @@ if (!isset($_SESSION['username'])) {
 <body>
 
     <!-- Logo -->
-    <div class="logo">
-        UniBite
-    </div>
-
+    <div class="logo">UniBite</div>
 
     <!-- Navbar -->
     <ul class="navbar">
 
         <li>
-            <a class="active" href="user_page.php">
-                Λίστα Αγγελιών
-            </a>
+            <a href="user_page.php"> Λίστα Αγγελιών</a>
         </li>
 
         <li>
-            <a href="user_map.php">
-                Χάρτης
-            </a>
+            <a class="active" href="user_map.php"> Χάρτης</a>
         </li>
 
         <li>
-            <a href="user_grade.php">
-                Βαθμολογία
-            </a>
+            <a href="user_grade.php"> Βαθμολογία </a>
         </li>
 
     </ul>
 
     <!-- Welcome message + Logout -->
     <div class="user-header">
-
         <div>
             <h1>
                 Καλώς Ήρθες, <span><?= $_SESSION['username']; ?></span>!
             </h1>
 
         </div>
-
-        <button onclick="window.location.href='logout.php'">
-            Logout
-        </button>
-
+        <button onclick="window.location.href='logout.php'">Logout </button>
     </div>
 
 
 </body>
 
 </html>
-
-
