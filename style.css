@@ -321,6 +321,221 @@ span {
     background-color: #f29a3c;
 }
 
+/* =========================
+   CHEF PAGE - ACTIONS
+   ========================= */
+
+.chef-actions {
+    padding: 0px 100px;
+    text-align: left;
+}
+
+.create-aggelia-button {
+    width: 250px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.create-aggelia-button:hover {
+    background-color: #388e3c;
+}
+
+/* =========================
+   CREATE AGGELIA PAGE
+   ========================= */
+
+.create-aggelia-container {
+    width: 90%;
+    max-width: 800px;
+
+    margin: 40px auto;
+
+    padding: 35px;
+
+    background-color: #fff;
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-aggelia-container h1 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.create-aggelia-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-aggelia-container label {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.create-aggelia-container input,
+.create-aggelia-container textarea {
+    width: 100%;
+    padding: 12px;
+
+    background-color: #eee;
+
+    border-radius: 6px;
+    border: none;
+    outline: none;
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+}
+
+.create-aggelia-container textarea {
+    resize: vertical;
+}
+
+
+/* =========================
+   ALLERGENS
+   ========================= */
+
+.allergens {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.allergens label {
+    display: flex;
+    align-items: center;
+
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.allergens input[type="checkbox"] {
+    width: auto;
+
+    margin: 0 8px 0 0;
+}
+
+
+/* =========================
+   CREATE / CANCEL BUTTONS
+   ========================= */
+
+.create-aggelia-container .create-aggelia-button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.cancel-button {
+    width: 100%;
+
+    background-color: #777;
+
+    margin-top: 10px;
+}
+
+.cancel-button:hover {
+    background-color: #555;
+}
+
+/* =========================
+   CHEF AGGELIES
+   ========================= */
+
+.chef-content {
+    padding: 30px 40px;
+    /*background-color: #fff;*/
+}
+
+.chef-content h2 {
+    text-align: left;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+
+#aggelies-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(300px, 1fr));
+
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+
+.aggelia-card {
+    padding: 25px;
+
+    background-color: #f7f7f7; 
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.aggelia-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+
+.aggelia-card p {
+    text-align: left;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+
+.aggelia-buttons {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.aggelia-buttons button {
+    margin: 0;
+}
+
+
+.delete-button {
+    background-color: #d9534f;
+}
+
+
+.delete-button:hover {
+    background-color: #b52b27;
+}
+
+
+.chef-content > .create-aggelia-button {
+    width: 250px;
+    margin: 0;
+
+    background-color: #4caf50;
+}
+
+
+.chef-content > .create-aggelia-button:hover {
+    background-color: #388e3c;
+}
 
 /* =========================
    RESPONSIVE

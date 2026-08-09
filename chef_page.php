@@ -66,6 +66,24 @@ if (!isset($_SESSION['username'])) {
 
     </div>
 
+    <div class="chef-actions">
+
+        <button class="create-aggelia-button"
+             onclick="window.location.href='create_aggelia.php'">
+             Δημιουργία Αγγελίας
+         </button>
+
+    </div>
+    
+    <div class="chef-content">
+
+        <h2>Οι Αγγελίες μου</h2>
+
+        <div id="aggelies-container"></div>
+
+    </div>
+
+<script src="chef_aggelies.js"></script>
 
 </body>
 
