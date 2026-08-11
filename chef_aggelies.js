@@ -65,51 +65,105 @@ function addAggeliaCard(aggelia) {
         document.getElementById("aggelies-container");
 
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
     card.classList.add("aggelia-card");
 
-    card.id = "aggelia-" + aggelia.id;
+    card.id =
+        "aggelia-" + aggelia.id;
+
+
+    /*
+        Φωτογραφία
+
+        Αν υπάρχει φωτογραφία,
+        την εμφανίζουμε.
+
+        Αν δεν υπάρχει,
+        εμφανίζουμε ένα απλό placeholder.
+    */
+
+    let photoHTML = "";
+
+    if (aggelia.photo) {
+
+        photoHTML = `
+            <img
+                src="${aggelia.photo}"
+                alt="${aggelia.title}"
+                class="aggelia-photo"
+            >
+        `;
+
+    }
+    else {
+
+        photoHTML = `
+            <div class="no-photo">
+                Δεν υπάρχει φωτογραφία
+            </div>
+        `;
+
+    }
 
 
     card.innerHTML = `
 
-        <h3>${aggelia.title}</h3>
+        ${photoHTML}
 
-        <p>${aggelia.description || ""}</p>
 
-        <p>
-            <strong>Μερίδες:</strong>
-            ${aggelia.merides_left}/${aggelia.merides_total}
-        </p>
+        <div class="aggelia-card-content">
 
-        <p>
-            <strong>Τοποθεσία:</strong>
-            ${aggelia.location}
-        </p>
+            <h3>
+                ${aggelia.title}
+            </h3>
 
-        <p>
-            <strong>Παραλαβή:</strong>
-            ${aggelia.pickup_time}
-        </p>
 
-        <p>
-            <strong>Αλλεργιογόνα:</strong>
-            ${aggelia.allergens || "Κανένα"}
-        </p>
+            <p>
+                ${aggelia.description || ""}
+            </p>
 
-        <div class="aggelia-buttons">
 
-            <button
-                onclick="editAggelia(${aggelia.id})">
-                Επεξεργασία
-            </button>
+            <p>
+                <strong>Μερίδες:</strong>
+                ${aggelia.merides_left}/${aggelia.merides_total}
+            </p>
 
-            <button
-                class="delete-button"
-                onclick="deleteAggelia(${aggelia.id})">
-                Διαγραφή
-            </button>
+
+            <p>
+                <strong>Τοποθεσία:</strong>
+                ${aggelia.location}
+            </p>
+
+
+            <p>
+                <strong>Παραλαβή:</strong>
+                ${aggelia.pickup_time}
+            </p>
+
+
+            <p>
+                <strong>Αλλεργιογόνα:</strong>
+                ${aggelia.allergens || "Κανένα"}
+            </p>
+
+
+            <div class="aggelia-buttons">
+
+                <button
+                    onclick="editAggelia(${aggelia.id})">
+                    Επεξεργασία
+                </button>
+
+
+                <button
+                    class="delete-button"
+                    onclick="deleteAggelia(${aggelia.id})">
+                    Διαγραφή
+                </button>
+
+            </div>
 
         </div>
 
@@ -119,6 +173,7 @@ function addAggeliaCard(aggelia) {
     container.appendChild(card);
 
 }
+
 
 function deleteAggelia(id) {
 

@@ -1,10 +1,15 @@
 <?php
 
 session_start();
+
 require_once 'config.php';
 
 header("Content-Type: application/json");
 
+
+/*
+    Έλεγχος σύνδεσης
+*/
 
 if (!isset($_SESSION['username'])) {
 
@@ -14,124 +19,330 @@ if (!isset($_SESSION['username'])) {
     ]);
 
     exit();
+
 }
 
 
-$data = json_decode(
-    file_get_contents("php://input"),
-    true
-);
+/*
+    Παίρνουμε τα δεδομένα
+*/
+
+$title =
+    $_POST['title'];
+
+$description =
+    $_POST['description'];
+
+$merides_total =
+    $_POST['merides_total'];
+
+$location =
+    $_POST['location'];
+
+$pickup_time =
+    $_POST['pickup_time'];
 
 
-$title = $data['title'];
-$description = $data['description'];
-$merides_total = $data['merides_total'];
-$location = $data['location'];
-$pickup_time = $data['pickup_time'];
+/*
+    Αλλεργιογόνα
 
+    Αν είναι ένα, το PHP το παίρνει
+    ως string.
 
-if (isset($data['allergens'])) {
+    Αν είναι πολλά, το PHP τα παίρνει
+    ως array.
+*/
 
-    $allergens = implode(",", $data['allergens']);
+if (isset($_POST['allergens'])) {
 
-} else {
+    if (is_array($_POST['allergens'])) {
+
+        $allergens =
+            implode(",", $_POST['allergens']);
+
+    }
+    else {
+
+        $allergens =
+            $_POST['allergens'];
+
+    }
+
+}
+else {
 
     $allergens = "";
 
 }
 
 
-/* Βρίσκουμε τον μάγειρα */
+/*
+    Upload φωτογραφίας
+*/
 
-$username = $_SESSION['username'];
+$photo = "";
 
-$result = $conn->query(
-    "SELECT id FROM users WHERE username = '$username'"
-);
+
+if (
+    isset($_FILES['photo']) &&
+    $_FILES['photo']['error'] === 0
+) {
+
+    $photo_name =
+        $_FILES['photo']['name'];
+
+    $photo_tmp =
+        $_FILES['photo']['tmp_name'];
+
+
+    /*
+        Παίρνουμε την επέκταση
+    */
+
+    $extension =
+        pathinfo(
+            $photo_name,
+            PATHINFO_EXTENSION
+        );
+
+
+    /*
+        Δημιουργούμε μοναδικό όνομα
+    */
+
+    $new_name =
+        uniqid("food_") . "." . $extension;
+
+
+    /*
+        Διαδρομή αποθήκευσης
+    */
+
+    $upload_path =
+        "uploads/" . $new_name;
+
+
+    /*
+        Έλεγχος φακέλου
+    */
+
+    if (!is_dir("uploads")) {
+
+        echo json_encode([
+
+            "success" => false,
+
+            "message" =>
+                "Ο φάκελος uploads δεν υπάρχει."
+
+        ]);
+
+        exit();
+
+    }
+
+
+    /*
+        Αποθήκευση φωτογραφίας
+    */
+
+    if (
+        move_uploaded_file(
+            $photo_tmp,
+            $upload_path
+        )
+    ) {
+
+        $photo =
+            $upload_path;
+
+    }
+    else {
+
+        echo json_encode([
+
+            "success" => false,
+
+            "message" =>
+                "Η φωτογραφία δεν μπόρεσε να αποθηκευτεί."
+
+        ]);
+
+        exit();
+
+    }
+
+}
+
+
+/*
+    Βρίσκουμε τον μάγειρα
+*/
+
+$username =
+    $_SESSION['username'];
+
+
+$result =
+    $conn->query(
+
+        "SELECT id
+         FROM users
+         WHERE username = '$username'"
+
+    );
+
+
+if (!$result) {
+
+    echo json_encode([
+
+        "success" => false,
+
+        "message" =>
+            "Σφάλμα κατά την αναζήτηση του χρήστη.",
+
+        "error" =>
+            $conn->error
+
+    ]);
+
+    exit();
+
+}
 
 
 if ($result->num_rows == 0) {
 
     echo json_encode([
+
         "success" => false,
-        "message" => "Ο χρήστης δεν βρέθηκε."
+
+        "message" =>
+            "Ο χρήστης δεν βρέθηκε."
+
     ]);
 
     exit();
+
 }
 
 
-$user = $result->fetch_assoc();
-
-$chef_id = $user['id'];
-
-
-/* Μερίδες */
-
-$merides_left = $merides_total;
+$user =
+    $result->fetch_assoc();
 
 
-/* Ημερομηνίες */
-
-$created_at = date("Y-m-d H:i:s");
-
-$expires_at = date(
-    "Y-m-d H:i:s",
-    strtotime("+48 hours")
-);
+$chef_id =
+    $user['id'];
 
 
-/* Δημιουργία αγγελίας */
+/*
+    Μερίδες
+*/
 
-$sql = "INSERT INTO aggelia
-(
-    chef_id,
-    title,
-    description,
-    merides_total,
-    merides_left,
-    location,
-    pickup_time,
-    created_at,
-    expires_at,
-    status,
-    allergens
-)
+$merides_left =
+    $merides_total;
 
-VALUES
-(
-    '$chef_id',
-    '$title',
-    '$description',
-    '$merides_total',
-    '$merides_left',
-    '$location',
-    '$pickup_time',
-    '$created_at',
-    '$expires_at',
-    'active',
-    '$allergens'
-)";
 
+/*
+    Ημερομηνίες
+*/
+
+$created_at =
+    date("Y-m-d H:i:s");
+
+
+$expires_at =
+    date(
+        "Y-m-d H:i:s",
+        strtotime("+48 hours")
+    );
+
+
+/*
+    Δημιουργία αγγελίας
+*/
+
+$sql = "
+
+    INSERT INTO aggelia
+
+    (
+        chef_id,
+        title,
+        description,
+        photo,
+        merides_total,
+        merides_left,
+        location,
+        pickup_time,
+        created_at,
+        expires_at,
+        status,
+        allergens
+    )
+
+    VALUES
+
+    (
+        '$chef_id',
+        '$title',
+        '$description',
+        '$photo',
+        '$merides_total',
+        '$merides_left',
+        '$location',
+        '$pickup_time',
+        '$created_at',
+        '$expires_at',
+        'active',
+        '$allergens'
+    )
+
+";
+
+
+/*
+    Εκτέλεση INSERT
+*/
 
 if ($conn->query($sql)) {
 
     echo json_encode([
-        "success" => true,
-        "message" => "Η αγγελία δημιουργήθηκε επιτυχώς!",
-        "id" => $conn->insert_id
+
+        "success" =>
+            true,
+
+        "message" =>
+            "Η αγγελία δημιουργήθηκε επιτυχώς!",
+
+        "id" =>
+            $conn->insert_id
+
     ]);
 
-} else {
+}
+else {
 
     echo json_encode([
-        "success" => false,
-        "message" => "Σφάλμα κατά τη δημιουργία της αγγελίας."
+
+        "success" =>
+            false,
+
+        "message" =>
+            "Σφάλμα κατά τη δημιουργία της αγγελίας.",
+
+        "error" =>
+            $conn->error
+
     ]);
 
 }
 
 ?>
+
+
+
 
 
 

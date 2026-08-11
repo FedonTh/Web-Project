@@ -12,71 +12,97 @@ document.getElementById("aggelia-form").addEventListener("submit", function(even
     let formData = new FormData(this);
 
 
-    // Παίρνουμε τα επιλεγμένα αλλεργιογόνα
-    let allergens = formData.getAll("allergens");
+    // Εμφανίζουμε τι στέλνουμε
+    console.log("FormData:");
 
+    for (let pair of formData.entries()) {
 
-    // Δημιουργούμε το αντικείμενο που θα στείλουμε ως JSON
-    let data = {
+        console.log(pair[0], pair[1]);
 
-        title: formData.get("title"),
-
-        description: formData.get("description"),
-
-        merides_total: formData.get("merides_total"),
-
-        location: formData.get("location"),
-
-        pickup_time: formData.get("pickup_time"),
-
-        allergens: allergens
-
-    };
-
-
-    console.log("Δεδομένα:", data);
+    }
 
 
     fetch("create_aggelia_process.php", {
 
         method: "POST",
 
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify(data)
+        body: formData
 
     })
 
 
     .then(function(response) {
 
-        console.log("Απάντηση από PHP:", response);
+        console.log("HTTP Status:", response.status);
 
-        return response.json();
+        return response.text();
 
     })
 
 
-    .then(function(result) {
+    .then(function(text) {
+
+        console.log("Απάντηση PHP:");
+
+        console.log(text);
+
+
+        /*
+            Προσπαθούμε να μετατρέψουμε
+            την απάντηση σε JSON
+        */
+
+        let result;
+
+        try {
+
+            result = JSON.parse(text);
+
+        }
+
+        catch (error) {
+
+            console.log(
+                "Η PHP δεν επέστρεψε έγκυρο JSON."
+            );
+
+            console.log(
+                "Πραγματική απάντηση:",
+                text
+            );
+
+
+            document.getElementById("message").textContent =
+                "Η PHP επέστρεψε σφάλμα. Δες την Console.";
+
+            document.getElementById("message").style.color =
+                "red";
+
+            return;
+
+        }
+
 
         console.log("JSON:", result);
 
 
-        let message = document.getElementById("message");
+        let message =
+            document.getElementById("message");
 
 
         if (result.success) {
 
-            message.textContent = result.message;
+            message.textContent =
+                result.message;
 
-            message.style.color = "green";
+            message.style.color =
+                "green";
 
 
             setTimeout(function() {
 
-                window.location.href = "chef_page.php";
+                window.location.href =
+                    "chef_page.php";
 
             }, 1000);
 
@@ -84,9 +110,11 @@ document.getElementById("aggelia-form").addEventListener("submit", function(even
 
         else {
 
-            message.textContent = result.message;
+            message.textContent =
+                result.message;
 
-            message.style.color = "red";
+            message.style.color =
+                "red";
 
         }
 
@@ -95,7 +123,7 @@ document.getElementById("aggelia-form").addEventListener("submit", function(even
 
     .catch(function(error) {
 
-        console.log("ERROR:", error);
+        console.log("FETCH ERROR:", error);
 
         document.getElementById("message").textContent =
             "Παρουσιάστηκε σφάλμα.";
@@ -103,3 +131,5 @@ document.getElementById("aggelia-form").addEventListener("submit", function(even
     });
 
 });
+
+

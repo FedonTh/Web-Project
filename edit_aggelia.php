@@ -3,58 +3,77 @@
 session_start();
 require_once 'config.php';
 
+
 if (!isset($_SESSION['username'])) {
+
     header("Location: index.php");
+
     exit();
+
 }
 
 
 if (!isset($_GET['id'])) {
+
     header("Location: chef_page.php");
+
     exit();
+
 }
 
 
-$id = $_GET['id'];
+$id =
+    $_GET['id'];
 
-$username = $_SESSION['username'];
+$username =
+    $_SESSION['username'];
 
 
 /* Βρίσκουμε τον chef */
 
-$result = $conn->query(
-    "SELECT id FROM users WHERE username = '$username'"
-);
+$result =
+    $conn->query(
+        "SELECT id
+         FROM users
+         WHERE username = '$username'"
+    );
 
-$user = $result->fetch_assoc();
 
-$chef_id = $user['id'];
+$user =
+    $result->fetch_assoc();
+
+$chef_id =
+    $user['id'];
 
 
 /* Παίρνουμε την αγγελία */
 
-$result = $conn->query("
-    SELECT *
-    FROM aggelia
-    WHERE id = '$id'
-    AND chef_id = '$chef_id'
-");
+$result =
+    $conn->query("
+        SELECT *
+        FROM aggelia
+        WHERE id = '$id'
+        AND chef_id = '$chef_id'
+    ");
 
 
 if ($result->num_rows == 0) {
 
     header("Location: chef_page.php");
+
     exit();
 
 }
 
 
-$aggelia = $result->fetch_assoc();
+$aggelia =
+    $result->fetch_assoc();
 
 
 /* Αλλεργιογόνα */
 
 $selected_allergens = [];
+
 
 if (!empty($aggelia['allergens'])) {
 
@@ -65,11 +84,17 @@ if (!empty($aggelia['allergens'])) {
 
 ?>
 
+
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-<title>UniBite - Επεξεργασία Αγγελίας</title>
+<title>
+    UniBite - Επεξεργασία Αγγελίας
+</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -81,10 +106,13 @@ if (!empty($aggelia['allergens'])) {
 
 <div class="create-aggelia-container">
 
-    <h1>Επεξεργασία Αγγελίας</h1>
+    <h1>
+        Επεξεργασία Αγγελίας
+    </h1>
 
 
     <form id="edit-aggelia-form">
+
 
         <input
             type="hidden"
@@ -155,10 +183,61 @@ if (!empty($aggelia['allergens'])) {
             type="datetime-local"
             id="pickup_time"
             name="pickup_time"
-            value="<?= date('Y-m-d\TH:i', strtotime($aggelia['pickup_time'])) ?>"
+            value="<?= date(
+                'Y-m-d\TH:i',
+                strtotime($aggelia['pickup_time'])
+            ) ?>"
             required
         >
 
+
+        <!-- =========================
+             ΦΩΤΟΓΡΑΦΙΑ
+             ========================= -->
+
+        <label>
+            Φωτογραφία
+        </label>
+
+
+        <?php if (!empty($aggelia['photo'])): ?>
+
+            <img
+                src="<?= htmlspecialchars($aggelia['photo']) ?>"
+                alt="Τρέχουσα φωτογραφία"
+                class="edit-aggelia-photo"
+            >
+
+        <?php else: ?>
+
+            <div class="edit-no-photo">
+                Δεν υπάρχει φωτογραφία
+            </div>
+
+        <?php endif; ?>
+
+
+        <label for="photo">
+            Επιλογή νέας φωτογραφίας
+        </label>
+
+        <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+        >
+
+
+        <p class="photo-info">
+            Αν δεν επιλέξεις νέα φωτογραφία,
+            θα παραμείνει η υπάρχουσα.
+        </p>
+
+
+        <!-- =========================
+             ΑΛΛΕΡΓΙΟΓΟΝΑ
+             ========================= -->
 
         <label>
             Αλλεργιογόνα
@@ -206,11 +285,12 @@ if (!empty($aggelia['allergens'])) {
 
             ?>
 
+
                 <label>
 
                     <input
                         type="checkbox"
-                        name="allergens"
+                        name="allergens[]"
                         value="<?= $allergen ?>"
 
                         <?php
@@ -221,7 +301,9 @@ if (!empty($aggelia['allergens'])) {
                                 $selected_allergens
                             )
                         ) {
+
                             echo "checked";
+
                         }
 
                         ?>
@@ -231,6 +313,7 @@ if (!empty($aggelia['allergens'])) {
 
                 </label>
 
+
             <?php endforeach; ?>
 
         </div>
@@ -238,7 +321,8 @@ if (!empty($aggelia['allergens'])) {
 
         <button
             type="submit"
-            class="create-aggelia-button">
+            class="create-aggelia-button"
+        >
 
             Αποθήκευση Αλλαγών
 
@@ -250,7 +334,8 @@ if (!empty($aggelia['allergens'])) {
 
     <button
         class="cancel-button"
-        onclick="window.location.href='chef_page.php'">
+        onclick="window.location.href='chef_page.php'"
+    >
 
         Ακύρωση
 

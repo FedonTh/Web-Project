@@ -1,56 +1,74 @@
 console.log("edit_aggelia.js φορτώθηκε");
 
 
-document.getElementById("edit-aggelia-form")
+document
+    .getElementById("edit-aggelia-form")
     .addEventListener("submit", function(event) {
 
         event.preventDefault();
 
 
-        console.log("Πατήθηκε Αποθήκευση Αλλαγών");
+        console.log(
+            "Πατήθηκε Αποθήκευση Αλλαγών"
+        );
 
 
-        let formData = new FormData(this);
+        /*
+            Παίρνουμε ολόκληρη τη φόρμα.
+
+            Το FormData περιλαμβάνει:
+            - text
+            - αριθμούς
+            - allergens
+            - φωτογραφία
+        */
+
+        let formData =
+            new FormData(this);
 
 
-        let data = {
+        /*
+            Debug
+        */
 
-            id: formData.get("id"),
+        console.log("FormData:");
 
-            title: formData.get("title"),
+        for (
+            let pair of formData.entries()
+        ) {
 
-            description: formData.get("description"),
+            console.log(
+                pair[0],
+                pair[1]
+            );
 
-            merides_total: formData.get("merides_total"),
-
-            location: formData.get("location"),
-
-            pickup_time: formData.get("pickup_time"),
-
-            allergens: formData.getAll("allergens")
-
-        };
-
-
-        console.log("Δεδομένα:", data);
+        }
 
 
-        fetch("edit_aggelia_process.php", {
+        /*
+            Στέλνουμε το FormData
+            στο PHP.
+        */
 
-            method: "POST",
+        fetch(
+            "edit_aggelia_process.php",
+            {
 
-            headers: {
+                method: "POST",
 
-                "Content-Type": "application/json"
+                body: formData
 
-            },
-
-            body: JSON.stringify(data)
-
-        })
+            }
+        )
 
 
         .then(function(response) {
+
+            console.log(
+                "HTTP Status:",
+                response.status
+            );
+
 
             return response.json();
 
@@ -59,11 +77,16 @@ document.getElementById("edit-aggelia-form")
 
         .then(function(result) {
 
-            console.log("JSON:", result);
+            console.log(
+                "JSON:",
+                result
+            );
 
 
             let message =
-                document.getElementById("message");
+                document.getElementById(
+                    "message"
+                );
 
 
             if (result.success) {
@@ -71,15 +94,19 @@ document.getElementById("edit-aggelia-form")
                 message.textContent =
                     result.message;
 
-                message.style.color = "green";
+                message.style.color =
+                    "green";
 
 
-                setTimeout(function() {
+                setTimeout(
+                    function() {
 
-                    window.location.href =
-                        "chef_page.php";
+                        window.location.href =
+                            "chef_page.php";
 
-                }, 1000);
+                    },
+                    1000
+                );
 
             }
 
@@ -88,7 +115,8 @@ document.getElementById("edit-aggelia-form")
                 message.textContent =
                     result.message;
 
-                message.style.color = "red";
+                message.style.color =
+                    "red";
 
             }
 
@@ -97,9 +125,14 @@ document.getElementById("edit-aggelia-form")
 
         .catch(function(error) {
 
-            console.log("ERROR:", error);
+            console.log(
+                "ERROR:",
+                error
+            );
 
-            document.getElementById("message")
+
+            document
+                .getElementById("message")
                 .textContent =
                 "Παρουσιάστηκε σφάλμα.";
 

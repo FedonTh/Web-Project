@@ -58,6 +58,14 @@ if (!isset($_SESSION['username'])) {
                 rows="5"
             ></textarea>
 
+            <label for="photo">Φωτογραφία (προαιρετικά)</label>
+
+            <input
+                 type="file"
+                 id="photo"
+                 name="photo"
+                accept="image/*"
+            >
 
             <label for="merides_total">Συνολικές Μερίδες</label>
 

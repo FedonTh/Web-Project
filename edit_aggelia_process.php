@@ -1,10 +1,15 @@
 <?php
 
 session_start();
+
 require_once 'config.php';
 
 header("Content-Type: application/json");
 
+
+/*
+    Έλεγχος σύνδεσης
+*/
 
 if (!isset($_SESSION['username'])) {
 
@@ -17,29 +22,44 @@ if (!isset($_SESSION['username'])) {
 }
 
 
-$data = json_decode(
-    file_get_contents("php://input"),
-    true
-);
+/*
+    Παίρνουμε τα δεδομένα
+*/
+
+$id = $_POST['id'];
+
+$title = $_POST['title'];
+
+$description = $_POST['description'];
+
+$merides_total = $_POST['merides_total'];
+
+$location = $_POST['location'];
+
+$pickup_time = $_POST['pickup_time'];
 
 
-$id = $data['id'];
+/*
+    Αλλεργιογόνα
 
-$title = $data['title'];
+    Το name="allergens" μπορεί να
+    στείλει είτε array είτε μία τιμή.
+*/
 
-$description = $data['description'];
+if (isset($_POST['allergens'])) {
 
-$merides_total = $data['merides_total'];
+    if (is_array($_POST['allergens'])) {
 
-$location = $data['location'];
+        $allergens = implode(
+            ",",
+            $_POST['allergens']
+        );
 
-$pickup_time = $data['pickup_time'];
+    } else {
 
+        $allergens = $_POST['allergens'];
 
-if (isset($data['allergens'])) {
-
-    $allergens =
-        implode(",", $data['allergens']);
+    }
 
 } else {
 
@@ -48,17 +68,25 @@ if (isset($data['allergens'])) {
 }
 
 
+/*
+    Username
+*/
+
 $username = $_SESSION['username'];
 
 
-/* Βρίσκουμε τον chef */
+/*
+    Βρίσκουμε τον chef
+*/
 
 $result = $conn->query(
-    "SELECT id FROM users WHERE username = '$username'"
+    "SELECT id
+     FROM users
+     WHERE username = '$username'"
 );
 
 
-if ($result->num_rows == 0) {
+if (!$result || $result->num_rows == 0) {
 
     echo json_encode([
         "success" => false,
@@ -76,19 +104,26 @@ $chef_id = $user['id'];
 
 
 /*
-    Υπολογίζουμε πόσες μερίδες
-    είχαν ήδη δοθεί.
+    Παίρνουμε την υπάρχουσα αγγελία
 */
 
 $result = $conn->query("
-    SELECT merides_total, merides_left
+
+    SELECT
+        merides_total,
+        merides_left,
+        photo
+
     FROM aggelia
+
     WHERE id = '$id'
+
     AND chef_id = '$chef_id'
+
 ");
 
 
-if ($result->num_rows == 0) {
+if (!$result || $result->num_rows == 0) {
 
     echo json_encode([
         "success" => false,
@@ -103,13 +138,20 @@ if ($result->num_rows == 0) {
 $old = $result->fetch_assoc();
 
 
+/*
+    Υπολογίζουμε πόσες μερίδες
+    έχουν ήδη δοθεί.
+*/
+
 $used_merides =
-    $old['merides_total'] - $old['merides_left'];
+    $old['merides_total']
+    -
+    $old['merides_left'];
 
 
 /*
-    Δεν επιτρέπουμε να βάλει
-    συνολικές μερίδες λιγότερες
+    Δεν επιτρέπουμε οι συνολικές
+    μερίδες να γίνουν λιγότερες
     από όσες έχουν ήδη δοθεί.
 */
 
@@ -118,7 +160,7 @@ if ($merides_total < $used_merides) {
     echo json_encode([
         "success" => false,
         "message" =>
-        "Οι συνολικές μερίδες δεν μπορούν να είναι λιγότερες από τις μερίδες που έχουν ήδη δοθεί."
+            "Οι συνολικές μερίδες δεν μπορούν να είναι λιγότερες από τις μερίδες που έχουν ήδη δοθεί."
     ]);
 
     exit();
@@ -127,10 +169,140 @@ if ($merides_total < $used_merides) {
 
 
 $merides_left =
-    $merides_total - $used_merides;
+    $merides_total
+    -
+    $used_merides;
 
 
-/* UPDATE */
+/*
+    Κρατάμε την παλιά φωτογραφία
+    αν δεν ανέβει καινούρια.
+*/
+
+$photo = $old['photo'];
+
+
+/*
+    Ελέγχουμε αν επιλέχθηκε
+    νέα φωτογραφία.
+*/
+
+if (
+    isset($_FILES['photo'])
+    &&
+    $_FILES['photo']['error'] === 0
+) {
+
+    $photo_name =
+        $_FILES['photo']['name'];
+
+    $photo_tmp =
+        $_FILES['photo']['tmp_name'];
+
+
+    /*
+        Παίρνουμε το extension
+    */
+
+    $extension =
+        pathinfo(
+            $photo_name,
+            PATHINFO_EXTENSION
+        );
+
+
+    /*
+        Δημιουργούμε μοναδικό όνομα
+    */
+
+    $new_name =
+        uniqid("food_")
+        . "."
+        . $extension;
+
+
+    /*
+        Διαδρομή αποθήκευσης
+    */
+
+    $upload_path =
+        "uploads/"
+        .
+        $new_name;
+
+
+    /*
+        Έλεγχος φακέλου uploads
+    */
+
+    if (!is_dir("uploads")) {
+
+        echo json_encode([
+            "success" => false,
+            "message" =>
+                "Ο φάκελος uploads δεν υπάρχει."
+        ]);
+
+        exit();
+
+    }
+
+
+    /*
+        Αποθηκεύουμε τη νέα φωτογραφία
+    */
+
+    if (
+        move_uploaded_file(
+            $photo_tmp,
+            $upload_path
+        )
+    ) {
+
+        /*
+            Η νέα φωτογραφία
+            γίνεται η ενεργή.
+        */
+
+        $photo = $upload_path;
+
+
+        /*
+            Διαγράφουμε την παλιά
+            φωτογραφία, αν υπάρχει.
+        */
+
+        if (
+            !empty($old['photo'])
+            &&
+            file_exists($old['photo'])
+        ) {
+
+            unlink(
+                $old['photo']
+            );
+
+        }
+
+    }
+    else {
+
+        echo json_encode([
+            "success" => false,
+            "message" =>
+                "Η νέα φωτογραφία δεν μπόρεσε να αποθηκευτεί."
+        ]);
+
+        exit();
+
+    }
+
+}
+
+
+/*
+    UPDATE
+*/
 
 $sql = "
 
@@ -141,6 +313,8 @@ $sql = "
         title = '$title',
 
         description = '$description',
+
+        photo = '$photo',
 
         merides_total = '$merides_total',
 
@@ -159,6 +333,10 @@ $sql = "
 ";
 
 
+/*
+    Εκτέλεση UPDATE
+*/
+
 if ($conn->query($sql)) {
 
     echo json_encode([
@@ -166,12 +344,11 @@ if ($conn->query($sql)) {
         "success" => true,
 
         "message" =>
-        "Η αγγελία ενημερώθηκε επιτυχώς!"
+            "Η αγγελία ενημερώθηκε επιτυχώς!"
 
     ]);
 
 }
-
 else {
 
     echo json_encode([
@@ -179,7 +356,10 @@ else {
         "success" => false,
 
         "message" =>
-        "Σφάλμα κατά την ενημέρωση της αγγελίας."
+            "Σφάλμα κατά την ενημέρωση της αγγελίας.",
+
+        "error" =>
+            $conn->error
 
     ]);
 
