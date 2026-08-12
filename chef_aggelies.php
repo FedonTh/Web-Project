@@ -1,71 +1,102 @@
 <?php
 
 session_start();
+
 if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
+
 <html lang="el">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>UniBite - Καταναλωτής</title>
+    <title>UniBite - Διαχείριση Αιτημάτων</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    <!-- Logo -->
-    <div class="logo">
-        UniBite
+
+<div class="logo">
+    UniBite
+</div>
+
+
+<ul class="navbar">
+
+    <li>
+        <a href="chef_page.php">
+            Διαχείριση Αγγελιών
+        </a>
+    </li>
+
+    <li>
+        <a class="active" href="chef_aggelies.php">
+            Διαχείριση Αιτημάτων
+        </a>
+    </li>
+
+    <li>
+        <a href="chef_points.php">
+            Προβολή Πόντων
+        </a>
+    </li>
+
+</ul>
+
+
+<div class="user-header">
+
+    <div>
+
+        <h1>
+
+            Καλώς Ήρθες,
+            <span>
+                <?= htmlspecialchars($_SESSION['username']); ?>
+            </span>!
+
+        </h1>
+
     </div>
 
 
-    <!-- Navbar -->
-    <ul class="navbar">
+    <button onclick="window.location.href='logout.php'">
 
-        <li>
-            <a href="chef_page.php">
-                Διαχείριση Αγγελιών
-            </a>
-        </li>
+        Logout
 
-        <li>
-            <a class="active" href="chef_aggelies.php">
-                Διαχείριση Αιτημάτων
-            </a>
-        </li>
+    </button>
 
-        <li>
-            <a href="chef_points.php">
-               Προβολή Πόντων
-            </a>
-        </li>
+</div>
 
-    </ul>
 
-    <!-- Welcome message + Logout -->
-    <div class="user-header">
+<div class="chef-content">
 
-        <div>
-            <h1>
-                Καλώς Ήρθες, <span><?= $_SESSION['username']; ?></span>!
-            </h1>
+    <h2>
+        Αιτήματα για τις Αγγελίες μου
+    </h2>
 
-        </div>
 
-        <button onclick="window.location.href='logout.php'">
-            Logout
-        </button>
+    <div id="aitimata-container"></div>
 
-    </div>
 
+    <p id="message"></p>
+
+</div>
+
+
+<script src="chef_aitimata.js"></script>
 
 </body>
 

@@ -673,6 +673,102 @@ span {
 }
 
 /* =========================
+USER PAGE - FEED
+========================= */
+
+.user-feed {
+    padding: 30px 50px;
+}
+
+.user-feed h2 {
+    text-align: left;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+USER AGGELIA CARD
+========================= */
+
+.user-aggelia-card {
+    overflow: hidden;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+
+.user-aggelia-card:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================
+PHOTO
+========================= */
+
+.aggelia-photo {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+
+.no-photo {
+    height: 220px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #eee;
+
+    font-size: 60px;
+}
+
+
+/* =========================
+SOLD OUT
+========================= */
+
+.user-aggelia-card.sold-out {
+    opacity: 0.55;
+    filter: grayscale(100%);
+}
+
+
+.sold-out-badge {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    margin-bottom: 10px;
+
+    background-color: #777;
+
+    color: white;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+FEED MESSAGE
+========================= */
+
+.feed-message {
+    margin-top: 30px;
+
+    text-align: center;
+
+    font-size: 18px;
+}
+
+/* =========================
    RESPONSIVE
    ========================= */
 
