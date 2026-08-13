@@ -193,12 +193,23 @@ if ($aitima['picked_up'] == 1) {
 if ($picked_up === true) {
 
 
+    /*
+        Σημειώνουμε ότι
+        η μερίδα παραλήφθηκε
+        και αποθηκεύουμε
+        την ημερομηνία παραλαβής.
+    */
+
     $result =
         $conn->query("
 
             UPDATE aitima
 
-            SET picked_up = TRUE
+            SET
+
+                picked_up = TRUE,
+
+                pickup_date = NOW()
 
             WHERE id = '$id'
 
@@ -250,7 +261,11 @@ else {
 
             UPDATE aitima
 
-            SET picked_up = FALSE
+            SET
+
+                picked_up = FALSE,
+
+                pickup_date = NULL
 
             WHERE id = '$id'
 

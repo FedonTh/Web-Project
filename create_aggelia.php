@@ -104,72 +104,72 @@ if (!isset($_SESSION['username'])) {
             <div class="allergens">
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Cereals containing gluten">
+                    <input type="checkbox" name="allergens[]" value="Cereals containing gluten">
                     Cereals containing gluten
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Crustaceans">
+                    <input type="checkbox" name="allergens[]" value="Crustaceans">
                     Crustaceans
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Eggs">
+                    <input type="checkbox" name="allergens[]" value="Eggs">
                     Eggs
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Fish">
+                    <input type="checkbox" name="allergens[]" value="Fish">
                     Fish
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Peanuts">
+                    <input type="checkbox" name="allergens[]" value="Peanuts">
                     Peanuts
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Soybeans">
+                    <input type="checkbox" name="allergens[]" value="Soybeans">
                     Soybeans
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Milk">
+                    <input type="checkbox" name="allergens[]" value="Milk">
                     Milk
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Nuts">
+                    <input type="checkbox" name="allergens[]" value="Nuts">
                     Nuts
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Celery">
+                    <input type="checkbox" name="allergens[]" value="Celery">
                     Celery
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Mustard">
+                    <input type="checkbox" name="allergens[]" value="Mustard">
                     Mustard
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Sesame seeds">
+                    <input type="checkbox" name="allergens[]" value="Sesame seeds">
                     Sesame seeds
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Sulphur dioxide and sulphites">
+                    <input type="checkbox" name="allergens[]" value="Sulphur dioxide and sulphites">
                     Sulphur dioxide and sulphites
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Lupin">
+                    <input type="checkbox" name="allergens[]" value="Lupin">
                     Lupin
                 </label>
 
                 <label>
-                    <input type="checkbox" name="allergens" value="Molluscs">
+                    <input type="checkbox" name="allergens[]" value="Molluscs">
                     Molluscs
                 </label>
 

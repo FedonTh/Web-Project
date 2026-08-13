@@ -769,6 +769,180 @@ FEED MESSAGE
 }
 
 /* =========================
+   CHEF POINTS
+========================= */
+
+.points-container {
+    width: 90%;
+    max-width: 600px;
+
+    margin: 50px auto;
+
+    padding: 35px;
+
+    background-color: #fff;
+
+    border-radius: 10px;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    text-align: center;
+}
+
+
+.points-container h2 {
+    font-size: 32px;
+
+    margin-bottom: 30px;
+}
+
+
+.points-box {
+    padding: 30px;
+
+    background-color: #f7f7f7;
+
+    border-radius: 10px;
+}
+
+
+.points-box p {
+    font-size: 22px;
+
+    margin-bottom: 15px;
+}
+
+
+.points-number {
+    display: block;
+
+    font-size: 50px;
+
+    font-weight: bold;
+
+    color: #f29a3c;
+}
+
+/* =========================
+   USER GRADE
+========================= */
+
+.grade-content {
+    width: 90%;
+    max-width: 900px;
+
+    margin: 40px auto;
+}
+
+
+.grade-content h2 {
+    text-align: left;
+
+    font-size: 30px;
+
+    margin-bottom: 25px;
+}
+
+
+#ratings-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(300px, 1fr));
+
+    gap: 25px;
+}
+
+
+.rating-card {
+    padding: 25px;
+
+    background-color: #f7f7f7;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.rating-card h3 {
+    font-size: 24px;
+
+    margin-bottom: 15px;
+}
+
+
+.rating-card p {
+    text-align: left;
+
+    font-size: 16px;
+
+    margin-bottom: 10px;
+}
+
+
+.rating-form {
+    margin-top: 20px;
+
+    text-align: center;
+}
+
+
+.rating-form p {
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+.stars {
+    text-align: center !important;
+
+    margin-top: 10px;
+}
+
+
+.stars button {
+    width: auto;
+
+    background: none;
+
+    color: #f29a3c;
+
+    font-size: 32px;
+
+    padding: 5px;
+
+    margin: 0;
+
+    border: none;
+
+    cursor: pointer;
+}
+
+
+.stars button:hover {
+    background: none;
+
+    color: #d97e20;
+}
+
+
+.rating-result {
+    margin-top: 20px;
+}
+
+
+.rating-result .stars {
+    color: #f29a3c;
+
+    font-size: 32px;
+
+    font-weight: bold;
+}
+
+/* =========================
    RESPONSIVE
    ========================= */
 

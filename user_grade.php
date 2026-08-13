@@ -1,65 +1,131 @@
 <?php
 
 session_start();
+
 if (!isset($_SESSION['username'])) {
+
     header("Location: index.php");
     exit();
+
 }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="el">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>UniBite - Καταναλωτής</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <title>UniBite - Βαθμολογία</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
 </head>
 
 <body>
 
-    <!-- Logo -->
-    <div class="logo">
-        UniBite
+
+<!-- Logo -->
+
+<div class="logo">
+    UniBite
+</div>
+
+
+<!-- Navbar -->
+
+<ul class="navbar">
+
+    <li>
+
+        <a href="user_page.php">
+            Λίστα Αγγελιών
+        </a>
+
+    </li>
+
+
+    <li>
+
+        <a href="user_map.php">
+            Χάρτης
+        </a>
+
+    </li>
+
+
+    <li>
+
+        <a class="active"
+           href="user_grade.php">
+
+            Βαθμολογία
+
+        </a>
+
+    </li>
+
+</ul>
+
+
+<!-- Welcome + Logout -->
+
+<div class="user-header">
+
+    <div>
+
+        <h1>
+
+            Καλώς Ήρθες,
+            <span>
+                <?= htmlspecialchars($_SESSION['username']); ?>
+            </span>!
+
+        </h1>
+
     </div>
 
 
-    <!-- Navbar -->
-    <ul class="navbar">
+    <button
+        onclick="window.location.href='logout.php'">
 
-        <li>
-            <a href="user_page.php"> Λίστα Αγγελιών </a>
-        </li>
+        Logout
 
-        <li>
-            <a href="user_map.php"> Χάρτης </a>
-        </li>
+    </button>
 
-        <li>
-            <a class="active" href="user_grade.php"> Βαθμολογία </a>
-        </li>
+</div>
 
-    </ul>
 
-    <!-- Welcome message + Logout -->
-    <div class="user-header">
+<!-- Ratings -->
 
-        <div>
-            <h1>
-                Καλώς Ήρθες, <span><?= $_SESSION['username']; ?></span>!
-            </h1>
+<div class="chef-content">
 
-        </div>
+    <h2>
+        Αξιολόγηση Αγγελιών
+    </h2>
 
-        <button onclick="window.location.href='logout.php'">
-            Logout
-        </button>
+
+    <div id="ratings-container">
+
+        <p>
+            Φόρτωση...
+        </p>
 
     </div>
 
+
+    <p id="message"></p>
+
+</div>
+
+
+<script src="user_grade.js"></script>
 
 </body>
 
