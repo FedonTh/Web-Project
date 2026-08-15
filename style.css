@@ -943,6 +943,55 @@ FEED MESSAGE
 }
 
 /* =========================
+   USER MAP
+   ========================= */
+
+#map {
+    width: 90%;
+    height: 600px;
+    margin: 30px auto;
+    border-radius: 15px;
+}
+
+.map-filters {
+    width: 90%;
+    margin: 30px auto 10px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.map-filters label {
+    font-weight: bold;
+}
+
+.map-filters select {
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.map-button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.filter-message {
+    width: 90%;
+    margin: 10px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* =========================
    RESPONSIVE
    ========================= */
 

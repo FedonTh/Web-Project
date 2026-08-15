@@ -19,6 +19,7 @@ if (!isset($_SESSION['username'])) {
     ]);
 
     exit();
+
 }
 
 
@@ -26,42 +27,49 @@ if (!isset($_SESSION['username'])) {
     Παίρνουμε τα δεδομένα
 */
 
-$id = $_POST['id'];
+$id =
+    $_POST['id'];
 
-$title = $_POST['title'];
+$title =
+    $_POST['title'];
 
-$description = $_POST['description'];
+$description =
+    $_POST['description'];
 
-$merides_total = $_POST['merides_total'];
+$merides_total =
+    $_POST['merides_total'];
 
-$location = $_POST['location'];
+$location =
+    $_POST['location'];
 
-$pickup_time = $_POST['pickup_time'];
+$pickup_time =
+    $_POST['pickup_time'];
 
 
 /*
     Αλλεργιογόνα
-
-    Το name="allergens" μπορεί να
-    στείλει είτε array είτε μία τιμή.
 */
 
 if (isset($_POST['allergens'])) {
 
     if (is_array($_POST['allergens'])) {
 
-        $allergens = implode(
-            ",",
-            $_POST['allergens']
-        );
+        $allergens =
+            implode(
+                ",",
+                $_POST['allergens']
+            );
 
-    } else {
+    }
+    else {
 
-        $allergens = $_POST['allergens'];
+        $allergens =
+            $_POST['allergens'];
 
     }
 
-} else {
+}
+else {
 
     $allergens = "";
 
@@ -72,25 +80,33 @@ if (isset($_POST['allergens'])) {
     Username
 */
 
-$username = $_SESSION['username'];
+$username =
+    $_SESSION['username'];
 
 
 /*
     Βρίσκουμε τον chef
 */
 
-$result = $conn->query(
-    "SELECT id
-     FROM users
-     WHERE username = '$username'"
-);
+$result =
+    $conn->query(
+
+        "SELECT id
+         FROM users
+         WHERE username = '$username'"
+
+    );
 
 
 if (!$result || $result->num_rows == 0) {
 
     echo json_encode([
+
         "success" => false,
-        "message" => "Ο χρήστης δεν βρέθηκε."
+
+        "message" =>
+            "Ο χρήστης δεν βρέθηκε."
+
     ]);
 
     exit();
@@ -98,36 +114,48 @@ if (!$result || $result->num_rows == 0) {
 }
 
 
-$user = $result->fetch_assoc();
+$user =
+    $result->fetch_assoc();
 
-$chef_id = $user['id'];
+
+$chef_id =
+    $user['id'];
 
 
 /*
     Παίρνουμε την υπάρχουσα αγγελία
 */
 
-$result = $conn->query("
+$result =
+    $conn->query("
 
-    SELECT
-        merides_total,
-        merides_left,
-        photo
+        SELECT
 
-    FROM aggelia
+            merides_total,
+            merides_left,
+            photo,
+            location,
+            latitude,
+            longitude
 
-    WHERE id = '$id'
+        FROM aggelia
 
-    AND chef_id = '$chef_id'
+        WHERE id = '$id'
 
-");
+        AND chef_id = '$chef_id'
+
+    ");
 
 
 if (!$result || $result->num_rows == 0) {
 
     echo json_encode([
+
         "success" => false,
-        "message" => "Η αγγελία δεν βρέθηκε."
+
+        "message" =>
+            "Η αγγελία δεν βρέθηκε."
+
     ]);
 
     exit();
@@ -135,7 +163,8 @@ if (!$result || $result->num_rows == 0) {
 }
 
 
-$old = $result->fetch_assoc();
+$old =
+    $result->fetch_assoc();
 
 
 /*
@@ -150,17 +179,18 @@ $used_merides =
 
 
 /*
-    Δεν επιτρέπουμε οι συνολικές
-    μερίδες να γίνουν λιγότερες
-    από όσες έχουν ήδη δοθεί.
+    Έλεγχος μερίδων
 */
 
 if ($merides_total < $used_merides) {
 
     echo json_encode([
+
         "success" => false,
+
         "message" =>
             "Οι συνολικές μερίδες δεν μπορούν να είναι λιγότερες από τις μερίδες που έχουν ήδη δοθεί."
+
     ]);
 
     exit();
@@ -175,16 +205,69 @@ $merides_left =
 
 
 /*
+    ========================================
+    ΣΥΝΤΕΤΑΓΜΕΝΕΣ
+    ========================================
+*/
+
+
+/*
+    Από προεπιλογή κρατάμε
+    τις παλιές συντεταγμένες.
+*/
+
+$latitude =
+    $old['latitude'];
+
+$longitude =
+    $old['longitude'];
+
+
+/*
+    Αν άλλαξε η τοποθεσία,
+    δημιουργούμε νέα τυχαία θέση.
+*/
+
+if ($location !== $old['location']) {
+
+
+    /*
+        Ενδεικτικό εύρος
+        Πανεπιστημίου Πατρών
+    */
+
+    $minLat = 38.2850;
+    $maxLat = 38.2900;
+
+    $minLng = 21.7750;
+    $maxLng = 21.7850;
+
+
+    $latitude =
+        $minLat +
+        (mt_rand() / mt_getrandmax())
+        * ($maxLat - $minLat);
+
+
+    $longitude =
+        $minLng +
+        (mt_rand() / mt_getrandmax())
+        * ($maxLng - $minLng);
+
+}
+
+
+/*
     Κρατάμε την παλιά φωτογραφία
     αν δεν ανέβει καινούρια.
 */
 
-$photo = $old['photo'];
+$photo =
+    $old['photo'];
 
 
 /*
-    Ελέγχουμε αν επιλέχθηκε
-    νέα φωτογραφία.
+    Ελέγχουμε νέα φωτογραφία
 */
 
 if (
@@ -200,10 +283,6 @@ if (
         $_FILES['photo']['tmp_name'];
 
 
-    /*
-        Παίρνουμε το extension
-    */
-
     $extension =
         pathinfo(
             $photo_name,
@@ -211,19 +290,11 @@ if (
         );
 
 
-    /*
-        Δημιουργούμε μοναδικό όνομα
-    */
-
     $new_name =
         uniqid("food_")
         . "."
         . $extension;
 
-
-    /*
-        Διαδρομή αποθήκευσης
-    */
 
     $upload_path =
         "uploads/"
@@ -231,26 +302,21 @@ if (
         $new_name;
 
 
-    /*
-        Έλεγχος φακέλου uploads
-    */
-
     if (!is_dir("uploads")) {
 
         echo json_encode([
+
             "success" => false,
+
             "message" =>
                 "Ο φάκελος uploads δεν υπάρχει."
+
         ]);
 
         exit();
 
     }
 
-
-    /*
-        Αποθηκεύουμε τη νέα φωτογραφία
-    */
 
     if (
         move_uploaded_file(
@@ -259,17 +325,13 @@ if (
         )
     ) {
 
-        /*
-            Η νέα φωτογραφία
-            γίνεται η ενεργή.
-        */
-
-        $photo = $upload_path;
+        $photo =
+            $upload_path;
 
 
         /*
             Διαγράφουμε την παλιά
-            φωτογραφία, αν υπάρχει.
+            φωτογραφία.
         */
 
         if (
@@ -288,9 +350,12 @@ if (
     else {
 
         echo json_encode([
+
             "success" => false,
+
             "message" =>
                 "Η νέα φωτογραφία δεν μπόρεσε να αποθηκευτεί."
+
         ]);
 
         exit();
@@ -321,6 +386,10 @@ $sql = "
         merides_left = '$merides_left',
 
         location = '$location',
+
+        latitude = '$latitude',
+
+        longitude = '$longitude',
 
         pickup_time = '$pickup_time',
 

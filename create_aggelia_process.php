@@ -45,12 +45,6 @@ $pickup_time =
 
 /*
     Αλλεργιογόνα
-
-    Αν είναι ένα, το PHP το παίρνει
-    ως string.
-
-    Αν είναι πολλά, το PHP τα παίρνει
-    ως array.
 */
 
 if (isset($_POST['allergens'])) {
@@ -95,10 +89,6 @@ if (
         $_FILES['photo']['tmp_name'];
 
 
-    /*
-        Παίρνουμε την επέκταση
-    */
-
     $extension =
         pathinfo(
             $photo_name,
@@ -106,25 +96,13 @@ if (
         );
 
 
-    /*
-        Δημιουργούμε μοναδικό όνομα
-    */
-
     $new_name =
         uniqid("food_") . "." . $extension;
 
 
-    /*
-        Διαδρομή αποθήκευσης
-    */
-
     $upload_path =
         "uploads/" . $new_name;
 
-
-    /*
-        Έλεγχος φακέλου
-    */
 
     if (!is_dir("uploads")) {
 
@@ -141,10 +119,6 @@ if (
 
     }
 
-
-    /*
-        Αποθήκευση φωτογραφίας
-    */
 
     if (
         move_uploaded_file(
@@ -260,6 +234,41 @@ $expires_at =
 
 
 /*
+    ========================================
+    ΤΥΧΑΙΑ ΘΕΣΗ ΣΤΟΝ ΧΑΡΤΗ
+    ========================================
+
+    Ενδεικτικό εύρος περιοχής
+    Πανεπιστημίου Πατρών.
+ 
+*/
+
+
+$minLat = 38.2850;
+$maxLat = 38.2900;
+
+$minLng = 21.7750;
+$maxLng = 21.7850;
+
+
+/*
+    Δημιουργούμε τυχαίες
+    συντεταγμένες
+*/
+
+$latitude =
+    $minLat +
+    (mt_rand() / mt_getrandmax())
+    * ($maxLat - $minLat);
+
+
+$longitude =
+    $minLng +
+    (mt_rand() / mt_getrandmax())
+    * ($maxLng - $minLng);
+
+
+/*
     Δημιουργία αγγελίας
 */
 
@@ -275,6 +284,8 @@ $sql = "
         merides_total,
         merides_left,
         location,
+        latitude,
+        longitude,
         pickup_time,
         created_at,
         expires_at,
@@ -292,6 +303,8 @@ $sql = "
         '$merides_total',
         '$merides_left',
         '$location',
+        '$latitude',
+        '$longitude',
         '$pickup_time',
         '$created_at',
         '$expires_at',
@@ -340,9 +353,3 @@ else {
 }
 
 ?>
-
-
-
-
-
-
