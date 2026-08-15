@@ -19,6 +19,8 @@ CREATE TABLE aggelia(
     merides_total INT NOT NULL,
     merides_left INT NOT NULL,
     location VARCHAR(255) NOT NULL,
+    latitude DECIMAL(10,7) NULL,
+	longitude DECIMAL(10,7) NULL,
     pickup_time DATETIME NOT NULL,
     created_at DATETIME NOT NULL,
     expires_at DATETIME NOT NULL,
