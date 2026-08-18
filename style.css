@@ -1119,6 +1119,62 @@ FEED MESSAGE
 }
 
 /* =========================
+   RESPONSIVE - TABLET
+   ========================= */
+
+@media (max-width: 1000px) {
+
+    /* Αγγελίες */
+    #aggelies-container {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    /* Αξιολογήσεις */
+    #ratings-container {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    /* Περιεχόμενο χρήστη */
+    .user-feed {
+        padding: 25px;
+    }
+
+
+    /* Περιεχόμενο chef */
+    .chef-content {
+        padding: 25px;
+    }
+
+
+    /* Header */
+    .user-header {
+        padding: 20px 25px;
+    }
+
+
+    /* Χάρτης */
+    #map {
+        width: 95%;
+        height: 500px;
+    }
+
+
+    .map-filters {
+        width: 95%;
+    }
+
+
+    /* Admin */
+    .points-box {
+        width: 90%;
+    }
+
+}
+/* =========================
    RESPONSIVE
    ========================= */
 
