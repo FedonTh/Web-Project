@@ -1,7 +1,7 @@
 
-/* =========================
+/* 
    GENERAL
-   ========================= */
+ */
 
 * {
     margin: 0;
@@ -11,9 +11,9 @@
 }
 
 
-/* =========================
+/* 
    LOGIN / REGISTER
-   ========================= */
+ */
 
 body {
     min-height: 100vh;
@@ -121,9 +121,9 @@ p a:hover {
 }
 
 
-/* =========================
+/* 
    GENERAL BOX PAGES
-   ========================= */
+ */
 
 h1 {
     font-size: 50px;
@@ -147,9 +147,9 @@ span {
 }
 
 
-/* =========================
+/* 
    ROLE SELECTION PAGE
-   ========================= */
+ */
 
 .role-container {
     width: 90%;
@@ -204,9 +204,9 @@ span {
 }
 
 
-/* =========================
+/* 
    USER PAGE - LOGO
-   ========================= */
+ */
 
 .logo {
     width: 100%;
@@ -223,9 +223,9 @@ span {
 }
 
 
-/* =========================
+/* 
    USER PAGE - NAVBAR
-   ========================= */
+ */
 
 .navbar {
     list-style-type: none;
@@ -307,9 +307,9 @@ span {
 }
 
 
-/* =========================
+/* 
    USER PAGE - LOGOUT
-   ========================= */
+ */
 
 .user-header button {
     width: 150px;
@@ -321,9 +321,9 @@ span {
     background-color: #f29a3c;
 }
 
-/* =========================
+/* 
    CHEF PAGE - ACTIONS
-   ========================= */
+ */
 
 .chef-actions {
     padding: 0px 100px;
@@ -343,9 +343,9 @@ span {
     background-color: #388e3c;
 }
 
-/* =========================
+/* 
    CREATE AGGELIA PAGE
-   ========================= */
+ */
 
 .create-aggelia-container {
     width: 90%;
@@ -400,9 +400,9 @@ span {
 }
 
 
-/* =========================
+/* 
    ALLERGENS
-   ========================= */
+ */
 
 .allergens {
     display: grid;
@@ -428,9 +428,9 @@ span {
 }
 
 
-/* =========================
+/* 
    CREATE / CANCEL BUTTONS
-   ========================= */
+ */
 
 .create-aggelia-container .create-aggelia-button {
     width: 100%;
@@ -449,9 +449,9 @@ span {
     background-color: #555;
 }
 
-/* =========================
+/* 
    CHEF AGGELIES
-   ========================= */
+*/
 
 .chef-content {
     padding: 30px 40px;
@@ -488,9 +488,9 @@ span {
         0 0 8px rgba(0, 0, 0, 0.1);
 }
 
-/* =========================
+/* 
    AGGELIA PHOTO
-   ========================= */
+*/
 
 .aggelia-photo {
 
@@ -507,9 +507,9 @@ span {
 }
 
 
-/* =========================
+/* 
    NO PHOTO
-   ========================= */
+*/
 
 .no-photo {
 
@@ -533,9 +533,9 @@ span {
 }
 
 
-/* =========================
+/* 
    AGGELIA CARD CONTENT
-   ========================= */
+*/
 
 .aggelia-card-content {
 
@@ -612,9 +612,9 @@ span {
     background-color: #388e3c;
 }
 
-/* =========================
+/* 
    EDIT AGGELIA PHOTO
-   ========================= */
+*/
 
 .edit-aggelia-photo {
 
@@ -672,9 +672,9 @@ span {
 
 }
 
-/* =========================
-USER PAGE - FEED
-========================= */
+/* 
+    USER PAGE - FEED
+*/
 
 .user-feed {
     padding: 30px 50px;
@@ -687,9 +687,9 @@ USER PAGE - FEED
 }
 
 
-/* =========================
-USER AGGELIA CARD
-========================= */
+/* 
+    USER AGGELIA CARD
+*/
 
 .user-aggelia-card {
     overflow: hidden;
@@ -703,9 +703,9 @@ USER AGGELIA CARD
 }
 
 
-/* =========================
-PHOTO
-========================= */
+/* 
+    PHOTO
+*/
 
 .aggelia-photo {
     width: 100%;
@@ -727,9 +727,9 @@ PHOTO
 }
 
 
-/* =========================
-SOLD OUT
-========================= */
+/* 
+    SOLD OUT
+*/
 
 .user-aggelia-card.sold-out {
     opacity: 0.55;
@@ -756,9 +756,9 @@ SOLD OUT
 }
 
 
-/* =========================
-FEED MESSAGE
-========================= */
+/* 
+    FEED MESSAGE
+*/
 
 .feed-message {
     margin-top: 30px;
@@ -768,9 +768,9 @@ FEED MESSAGE
     font-size: 18px;
 }
 
-/* =========================
+/* 
    CHEF POINTS
-========================= */
+*/
 
 .points-container {
     width: 90%;
@@ -823,9 +823,9 @@ FEED MESSAGE
     color: #f29a3c;
 }
 
-/* =========================
+/* 
    USER GRADE
-========================= */
+*/
 
 .grade-content {
     width: 90%;
@@ -942,9 +942,9 @@ FEED MESSAGE
     font-weight: bold;
 }
 
-/* =========================
+/* 
    USER MAP
-   ========================= */
+*/
 
 #map {
     width: 90%;
@@ -992,9 +992,9 @@ FEED MESSAGE
 }
 
 
-/* =========================
+/* 
    ADMIN STATISTICS
-   ========================= */
+*/
 
 .admin-statistics {
 
@@ -1067,9 +1067,9 @@ FEED MESSAGE
 
 }
 
-/* =========================
+/* 
    ADMIN LEADERBOARD
-   ========================= */
+*/
 
 .admin-page-title {
 
@@ -1118,9 +1118,9 @@ FEED MESSAGE
 
 }
 
-/* =========================
+/* 
    RESPONSIVE - TABLET
-   ========================= */
+*/
 
 @media (max-width: 1000px) {
 
@@ -1174,9 +1174,9 @@ FEED MESSAGE
     }
 
 }
-/* =========================
+/* 
    RESPONSIVE
-   ========================= */
+*/
 
 @media (max-width: 700px) {
 

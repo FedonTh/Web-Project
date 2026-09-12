@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-/* =========================
+/* 
    LOAD RATINGS
-   ========================= */
+ */
 
 function loadRatings() {
 
@@ -73,9 +73,9 @@ function loadRatings() {
 }
 
 
-/* =========================
+/* 
    DISPLAY RATINGS
-   ========================= */
+ */
 
 function displayRatings(ratings) {
 
@@ -119,9 +119,9 @@ function displayRatings(ratings) {
 }
 
 
-/* =========================
+/* 
    CREATE RATING CARD
-   ========================= */
+ */
 
 function addRatingCard(rating) {
 
@@ -235,9 +235,9 @@ function addRatingCard(rating) {
 }
 
 
-/* =========================
+/* 
    SUBMIT RATING
-   ========================= */
+ */
 
 function submitRating(aitimaId) {
 

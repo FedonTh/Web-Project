@@ -124,9 +124,7 @@ if (!isset($_SESSION['username'])) {
     </h2>
 
 
-    <!-- =========================
-         ΦΙΛΤΡΑ
-         ========================= -->
+    <!-- ΦΙΛΤΡΑ -->
 
     <div class="map-filters">
 
@@ -200,8 +198,6 @@ if (!isset($_SESSION['username'])) {
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
     </script>
 
-
-    <!-- Δικό μας JS -->
 
     <script src="user_map.js"></script>
 

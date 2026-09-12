@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-/* =========================
+/*
    LOAD AITIMATA
-   ========================= */
+ */
 
 function loadAitimata() {
 
@@ -59,9 +59,9 @@ function loadAitimata() {
 }
 
 
-/* =========================
+/* 
    DISPLAY AITIMATA
-   ========================= */
+ */
 
 function displayAitimata(aitimata) {
 
@@ -96,9 +96,9 @@ function displayAitimata(aitimata) {
 }
 
 
-/* =========================
+/* 
    CREATE CARD
-   ========================= */
+ */
 
 function addAitimaCard(aitima) {
 
@@ -292,9 +292,9 @@ function addAitimaCard(aitima) {
 }
 
 
-/* =========================
+/* 
    STATUS TEXT
-   ========================= */
+ */
 
 function getStatusText(status) {
 
@@ -318,9 +318,9 @@ function getStatusText(status) {
 }
 
 
-/* =========================
+/* 
    APPROVE / REJECT
-   ========================= */
+ */
 
 function updateAitima(id, status) {
 
@@ -425,9 +425,9 @@ function updateAitima(id, status) {
 }
 
 
-/* =========================
+/*
    PICKUP
-   ========================= */
+ */
 
 function pickupAitima(id, pickedUp) {
 

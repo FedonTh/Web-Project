@@ -2,9 +2,7 @@ console.log("admin_page.js φορτώθηκε");
 
 
 /*
-    =========================
     ΦΟΡΤΩΣΗ ΣΤΑΤΙΣΤΙΚΩΝ
-    =========================
 */
 
 document.addEventListener(
@@ -18,9 +16,7 @@ document.addEventListener(
 
 
 /*
-    =========================
     GET STATISTICS
-    =========================
 */
 
 function loadStatistics() {

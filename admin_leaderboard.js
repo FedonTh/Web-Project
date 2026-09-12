@@ -12,9 +12,7 @@ document.addEventListener(
 
 
 /*
-    =========================
     ΦΟΡΤΩΣΗ LEADERBOARD
-    =========================
 */
 
 function loadLeaderboard() {
@@ -80,9 +78,7 @@ function loadLeaderboard() {
 
 
 /*
-    =========================
     TOP DONOR
-    =========================
 */
 
 function displayTopDonor(donor) {
@@ -137,9 +133,7 @@ function displayTopDonor(donor) {
 
 
 /*
-    =========================
     TOP RATED
-    =========================
 */
 
 function displayTopRated(meals) {

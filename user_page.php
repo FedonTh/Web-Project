@@ -103,7 +103,7 @@ if (!isset($_SESSION['username'])) {
 
             <!--
                 Οι αγγελίες
-                θα μπουν εδώ
+                μπαίνουν εδώ
                 μέσω JavaScript
             -->
 

@@ -12,9 +12,7 @@ document.addEventListener(
 
 
 /*
-    =========================
     LOAD AGGELIES
-    =========================
 */
 
 function loadAggelies() {
@@ -62,9 +60,7 @@ function loadAggelies() {
 
 
 /*
-    =========================
     DISPLAY AGGELIES
-    =========================
 */
 
 function displayAggelies(aggelies) {
@@ -109,9 +105,7 @@ function displayAggelies(aggelies) {
 
 
 /*
-    =========================
     CREATE CARD
-    =========================
 */
 
 function addAggeliaCard(aggelia) {
@@ -319,9 +313,7 @@ function addAggeliaCard(aggelia) {
 }
 
 /*
-    =========================
     SEND AITIMA
-    =========================
 */
 
 function sendAitima(aggeliaId, button) {

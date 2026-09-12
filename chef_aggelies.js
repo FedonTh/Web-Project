@@ -5,9 +5,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-/* =========================
+/* 
    LOAD AGGELIES
-   ========================= */
+ */
 
 function loadAggelies() {
 
@@ -34,9 +34,9 @@ function loadAggelies() {
 }
 
 
-/* =========================
+/* 
    DISPLAY CARDS
-   ========================= */
+ */
 
 function displayAggelies(aggelies) {
 
@@ -55,9 +55,9 @@ function displayAggelies(aggelies) {
 }
 
 
-/* =========================
+/* 
    CREATE CARD
-   ========================= */
+ */
 
 function addAggeliaCard(aggelia) {
 
